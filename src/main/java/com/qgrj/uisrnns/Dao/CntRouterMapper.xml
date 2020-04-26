@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qgrj.uisrnns.Dao.CntRouterMapper">
+  <resultMap id="BaseResultMap" type="com.qgrj.uisrnns.Pojo.CntRouter">
+    <id column="RouterID" jdbcType="INTEGER" property="routerid" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cnt_router
+    where RouterID = #{routerid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qgrj.uisrnns.Pojo.CntRouter">
+    insert into cnt_router (RouterID, IP)
+    values (#{routerid,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.qgrj.uisrnns.Pojo.CntRouter">
+    update cnt_router
+    set IP = #{ip,jdbcType=VARCHAR}
+    where RouterID = #{routerid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select RouterID, IP
+    from cnt_router
+    where RouterID = #{routerid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select RouterID, IP
+    from cnt_router
+  </select>
+</mapper>

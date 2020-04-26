@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qgrj.uisrnns.Dao.CntExcludeMapper">
+  <resultMap id="BaseResultMap" type="com.qgrj.uisrnns.Pojo.CntExclude">
+    <id column="DID" jdbcType="INTEGER" property="did" />
+    <result column="UKEY" jdbcType="VARCHAR" property="ukey" />
+    <result column="Date" jdbcType="TIMESTAMP" property="date" />
+    <result column="IFOperation" jdbcType="INTEGER" property="ifoperation" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cnt_exclude
+    where DID = #{did,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qgrj.uisrnns.Pojo.CntExclude">
+    insert into cnt_exclude (DID, UKEY, Date, 
+      IFOperation)
+    values (#{did,jdbcType=INTEGER}, #{ukey,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{ifoperation,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.qgrj.uisrnns.Pojo.CntExclude">
+    update cnt_exclude
+    set UKEY = #{ukey,jdbcType=VARCHAR},
+      Date = #{date,jdbcType=TIMESTAMP},
+      IFOperation = #{ifoperation,jdbcType=INTEGER}
+    where DID = #{did,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select DID, UKEY, Date, IFOperation
+    from cnt_exclude
+    where DID = #{did,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select DID, UKEY, Date, IFOperation
+    from cnt_exclude
+  </select>
+
+  <select id="selectByUkeyofDate" parameterType="java.lang.String">
+    select Date
+    from cnt_exclude
+    where UKEY=#{ukey}
+  </select>
+</mapper>

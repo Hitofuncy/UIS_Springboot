@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qgrj.uisrnns.Dao.CntCallbellMapper" >
+  <resultMap id="BaseResultMap" type="com.qgrj.uisrnns.Pojo.CntCallbell" >
+    <id column="CID" property="cid" jdbcType="INTEGER" />
+    <result column="UKEY" property="ukey" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="Date" property="date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cnt_callbell
+    where CID = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qgrj.uisrnns.Pojo.CntCallbell" >
+    insert into cnt_callbell (CID, UKEY, IP,
+      Date)
+    values (#{cid,jdbcType=INTEGER}, #{ukey,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+      #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.qgrj.uisrnns.Pojo.CntCallbell" >
+    update cnt_callbell
+    set UKEY = #{ukey,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
+      Date = #{date,jdbcType=TIMESTAMP}
+    where CID = #{cid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select CID, UKEY, IP, Date
+    from cnt_callbell
+    where CID = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select CID, UKEY, IP, Date
+    from cnt_callbell
+  </select>
+
+  <select id="selectbyKeyofIps" parameterType="java.lang.String"  >
+    select IP
+    from cnt_callbell
+    where UKEY=#{ukey}
+  </select>
+</mapper>
