@@ -57,8 +57,6 @@ public class UisRnnController {
     CntDatatablesService cntDatatablesServiceImpl;
     @GetMapping(path="/uis")
     public void getuis(){
-
-
         // SETP1 遍历文件夹 提取出 文件名 和 文件路径
         List<String> strings = new ArrayList<String>();
         findFileList(new File(dir),strings);

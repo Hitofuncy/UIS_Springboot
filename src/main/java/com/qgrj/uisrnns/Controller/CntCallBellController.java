@@ -33,39 +33,34 @@ public class CntCallBellController { // demo: 127.0.0.1:8080/action/call 传入i
     private CntCallBellService cntCallBellServiceImpl;
 
     @GetMapping(path="/call")
-    public int call(String[] ip,int post,String msg,String key) throws IOException {
+    public int call(String ip,int post,String msg,String key) throws IOException {
         if (!msg.equals("call"))
             return 0;
-//        if(key.equals("数据库的内容")== true)
-//            return 0;
+
+        int ofkey=cntExcludeServiceImpl.selectBykey(key);
+        if (ofkey!=1)
+            return 0;
+
         TCPUtil tcpUtil=new TCPUtil();
-//        Date date = cntExcludeServiceImpl.selectByUkeyofDate(key);
-//        if (date==null)
-//            return 0;
-        for (String aip:ip) {
 
             CntCallbell cntCallbell = new CntCallbell();
-//            cntCallbell.setDate(date);
-            cntCallbell.setIp(aip);
+            cntCallbell.setIp(ip);
             cntCallbell.setUkey(key);
             cntCallBellServiceImpl.insert(cntCallbell);
-            tcpUtil.run(aip,post,msg);
-        }
+            tcpUtil.run(ip,post,msg);
+
         return 1;
     }
 
     @GetMapping(path="/uncall")
-    public int uncall(int post,String key) throws IOException {
-        TCPUtil tcpUtil=new TCPUtil();
-        List<String> ips = cntCallBellServiceImpl.selectbyKeyofIps(key);
-        for (String ip:ips) {
-            tcpUtil.run(ip,post,"uncall");
-        }
+    public int uncall(int post,String ip) throws IOException {
+        TCPUtil tcpUtil = new TCPUtil();
+        tcpUtil.run(ip, post, "uncall");
         return 1;
     }
     //audio
     @GetMapping(path="/audio")
-    public int audio(String[] args ,String msg,int post) throws IOException {
+    public int audio(String[] args ,int post) throws IOException {
         TCPUtil tcpUtil=new TCPUtil();
         for (String ip:args) {
             tcpUtil.run(ip,post,"audio");

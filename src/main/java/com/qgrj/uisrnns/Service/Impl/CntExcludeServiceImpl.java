@@ -44,4 +44,9 @@ public class CntExcludeServiceImpl implements CntExcludeService {
     public Date selectByUkeyofDate(String ukey) {
         return cntExcludeMapper.selectByUkeyofDate(ukey);
     }
+
+    @Override
+    public Integer selectBykey(String ukey) {
+        return cntExcludeMapper.selectBykey(ukey);
+    }
 }

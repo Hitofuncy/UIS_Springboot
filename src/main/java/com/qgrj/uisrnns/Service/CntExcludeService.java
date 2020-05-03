@@ -17,4 +17,6 @@ public interface CntExcludeService {
     int updateByPrimaryKey(CntExclude record);
 
     Date selectByUkeyofDate(String ukey);
+
+    Integer selectBykey(String ukey);
 }
