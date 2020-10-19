@@ -4,6 +4,7 @@ package com.qgrj.uisrnns.Dao;
 
 import com.qgrj.uisrnns.Pojo.CntDatatables;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -31,6 +32,10 @@ public interface CntDatatablesMapper {
     //近七天的数据
     @Select("SELECT * FROM cnt_datatables WHERE (TO_DAYS(NOW()) - TO_DAYS(cnt_datatables.Date)  )<= 7")
     public List<CntDatatables> getLastSevenDayInfo();
+
+    //某楼七天数据
+    @Select("SELECT * FROM cnt_datatables WHERE (TO_DAYS(NOW()) - TO_DAYS(cnt_datatables.Date)  )<= 7 and Location LIKE CONCAT(#{id},'%')")
+    public List<CntDatatables> getLastSevenDayInfoById(@Param("id") String id);
 
 
 }

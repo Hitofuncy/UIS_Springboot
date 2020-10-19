@@ -5,6 +5,7 @@ import com.qgrj.uisrnns.Pojo.CntDatatables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,5 +33,8 @@ public class AppServiceController {
     // 近7天的查询总数据
     @GetMapping("/getLastSevenDayInfo")
     public List<CntDatatables> getLastSevenDayInfo(){ return cntDatatablesMapper.getLastSevenDayInfo();}
+
+    @GetMapping("/getLastSevenDayInfoById")
+    public List<CntDatatables> getLastSevenDayInfoById(@RequestParam("id") String id){ return cntDatatablesMapper.getLastSevenDayInfoById(id);}
 
 }
