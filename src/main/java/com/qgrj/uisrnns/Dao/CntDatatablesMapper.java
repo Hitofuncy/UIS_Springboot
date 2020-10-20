@@ -30,12 +30,20 @@ public interface CntDatatablesMapper {
     public Integer flowRecord();
 
     //近七天的数据
-    @Select("SELECT * FROM cnt_datatables WHERE (TO_DAYS(NOW()) - TO_DAYS(cnt_datatables.Date)  )<= 7")
+    @Select("SELECT * FROM cnt_datatables WHERE (TO_DAYS(NOW()) - TO_DAYS(cnt_datatables.Date)  )<= 7  order by Date ASC")
     public List<CntDatatables> getLastSevenDayInfo();
 
     //某楼七天数据
-    @Select("SELECT * FROM cnt_datatables WHERE (TO_DAYS(NOW()) - TO_DAYS(cnt_datatables.Date)  )<= 7 and Location LIKE CONCAT(#{id},'%')")
+    @Select("SELECT * FROM cnt_datatables WHERE (TO_DAYS(NOW()) - TO_DAYS(cnt_datatables.Date)  )<= 7 and Location LIKE CONCAT(#{id},'%')  order by Date ASC")
     public List<CntDatatables> getLastSevenDayInfoById(@Param("id") String id);
+
+    //某楼梯口数据
+    @Select("SELECT * FROM cnt_datatables WHERE Location=#{id}  order by Date ASC")
+    public List<CntDatatables> getLastSevenDayInfoByIder(@Param("id") String id); // 精确
+
+    //某楼梯口数据
+    @Select("select * from cnt_datatables WHERE PeopleNum =  (SELECT min(cnt_datatables.PeopleNum) FROM cnt_datatables WHERE cnt_datatables.Location LIKE CONCAT(#{id},'%')) and Location LIKE CONCAT(#{id},'%');")
+    public List<CntDatatables> getLastSevenDayInfoByIdyou(@Param("id") String id); //  1 2 3
 
 
 }

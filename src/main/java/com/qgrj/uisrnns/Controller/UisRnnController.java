@@ -65,8 +65,8 @@ public class UisRnnController {
             String[] tmp=strings.get(i).split("\\\\");
             String filename=(tmp[tmp.length-1]).split("[.]")[0];
             String unip = toip(filename);
-            //int num=have_uis(filename,dir);
-            int num=2;
+            int num=have_uis(filename,dir);
+            //int num=2;
             Integer id = cntRouterServiceImpl.slectbyipofid(unip);
             String place = cntBellServiceImpl.selectByidofplace(id);
             //2020-04-06 21:48:16
@@ -125,7 +125,7 @@ public class UisRnnController {
      *
      * **/
     public static String conversionormat(String fileName,String iputload) {
-        String webroot = "D:\\ffmpeg\\bin";  //ffmpeg安装路径
+        String webroot = "D:\\Program Files\\ffmpeg\\bin";  //ffmpeg安装路径
 
         String sourcePath = iputload+"\\" + fileName + ".m4a";
         String targetPath = iputload+"\\" + fileName + ".wav";

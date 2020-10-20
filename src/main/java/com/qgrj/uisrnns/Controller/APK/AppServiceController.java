@@ -37,4 +37,11 @@ public class AppServiceController {
     @GetMapping("/getLastSevenDayInfoById")
     public List<CntDatatables> getLastSevenDayInfoById(@RequestParam("id") String id){ return cntDatatablesMapper.getLastSevenDayInfoById(id);}
 
+    // 精确查询 某口七天数据
+    @GetMapping("/getLastSevenDayInfoByIder")
+    public List<CntDatatables> getLastSevenDayInfoByIder(@RequestParam("id") String id){ return cntDatatablesMapper.getLastSevenDayInfoByIder(id);}
+
+    // 精确查询 某口七天数据
+    @GetMapping("/you")
+    public List<CntDatatables> getLastSevenDayInfoByIdyou(@RequestParam("id") String id){ return cntDatatablesMapper.getLastSevenDayInfoByIdyou(id);}
 }
